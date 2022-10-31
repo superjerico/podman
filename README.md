@@ -128,26 +128,26 @@ Given
 
 When участники *именуют сценарии*, выполняют команды и анализируют их вывод и поведение
 ----
-- Сценарий "Как ...?"
+- Сценарий "Как Диагностировать Систему?"
 ```shell
 podman version # TODO: собственные пометки участников для будущего использования в проектах
 podman system info
 podman system df
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как Выйти?"
 ```shell
 podman logout
 podman login {{ registry-host }}
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как Установить Образ?"
 ```shell
 podman image pull alpine:3.14
 podman system df
 ````
 
-- Сценарий "Как ...?"
+- Сценарий "Как Запустить Контейнер?"
 ```shell
 podman container run hello
 
@@ -156,7 +156,7 @@ podman container run --name demo -it alpine:3.14
 /# exit 
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как Удалить Установленный Контейнер?"
 ```shell
 podman container ls [--all]
 podman container rm demo
