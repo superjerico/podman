@@ -279,23 +279,23 @@ podman image ls
 
 - Сценарий "Как ...?"
 ```shell
-podman image history alpine:3.14
-podman image inspect alpine:3.14 [| jq]
+podman image history artifactory.raiffeisen.ru/ext-rbru-osimage-docker/alpine:3.14
+podman image inspect artifactory.raiffeisen.ru/ext-rbru-osimage-docker/alpine:3.14 | jq
 ```
 
 - Сценарий "Как ...?"
 ```shell
-podman container run --name demo -it alpine
+podman container run --name demo -it artifactory.raiffeisen.ru/ext-rbru-osimage-docker/alpine:3.14
 /# touch side-effect.txt
 /# exit
 podman container diff demo
-podman container commit demo {{ registry-host }}/container-training/{{ registry-account }}/demo
+podman container commit demo artifactory.raiffeisen.ru/container-training/docker/ruapnsd/demo
 podman image ls
 ```
 
 - Сценарий "Как ...?"
 ```shell
-podman image tag {{ registry-host }}/container-training/{{ registry-account }}/demo:latest {{ registry-host }}/container-training/{{ registry-account }}/demo:1.0.0
+podman image tag artifactory.raiffeisen.ru/container-training/ruapnsd/demo:latest {{ registry-host }}/container-training/{{ registry-account }}/demo:1.0.0
 podman image ls
 ```
 
