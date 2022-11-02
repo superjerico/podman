@@ -400,7 +400,7 @@ podman container ls --all
 
 - Сценарий "Как запустить контейнер в фоновом режиме?"
 ```shell
-podman container run --detach --name proxy --publish 8080:80 nginx:1.19.4 # note `--detach` or `-d`
+podman container run --detach --name proxy --publish 8080:80 artifactory.raiffeisen.ru/virtual-docker-k8s/nginx:1.22.0 # note `--detach` or `-d`
 podman container ls
 curl localhost:8080
 ```
@@ -433,7 +433,7 @@ podman container restart ...
 
 - Сценарий "Как удалить работающий контейнер?"
 ```shell
-podman container rm --force
+podman container rm --force ..
 ```
 
 - Сценарий "Как удалить остановленный контейнер?"
@@ -572,7 +572,7 @@ When участники именуют сценарии, формируют св
 ```shell
 vi backend/Containerfile # Replace base image with one that suitable for corporate image registry
 podman image build \
-  --tag {{ registry-host }}/container-training-docker/{{ registry-account }}/app:1.0.0 \ # set up symbolic name for image
+  --tag artifactory.raiffeisen.ru/container-training-docker/ruapnsd/app:1.0.0 \ # set up symbolic name for image
   ./backend # folder where Containerfile located
 
 podman image ls
@@ -584,9 +584,9 @@ podman container run \
  --name backend \
  --rm \ # одноразовый: удалится после остановки
  --detach \ # -d
- --publish 8080:8080 \ # -p [host address:]8080:8080
+ --publish 10.244.35.15:8080:8080 \ # -p [host address:]8080:8080
  --env SPRING_PROFILES_ACTIVE=qa \ # -e: в контейнере действует переменная окружения
- {{ registry-host }}/container-training-docker/{{ registry-account }}/app:1.0.0 \ #  имя и тег
+ artifactory.raiffeisen.ru/container-training-docker/ruapnsd/app:1.0.0 \ #  имя и тег
   --spring.profiles.active=qa # параметры командной строки
 ```
 
@@ -594,25 +594,25 @@ podman container run \
 ```shell
 podman container ls --all # Check for status
 
-curl localhost:8080/dbo/actuator/health
-open http://localhost:8080/dbo/swagger-ui/
+curl 10.244.35.15:8080/dbo/actuator/health
+open http://10.244.35.15:8080/dbo/swagger-ui/
 ```
 
 - [ ] Сценарий "Как мягко остановить приложение средствами самого приложения?"
 ```shell
-curl -X POST localhost:8080/dbo/actuator/shutdown
+curl -X POST 10.244.35.15:8080/dbo/actuator/shutdown
 ```
 
 - [ ] Сценарий "Как опубликовать проверенный образ в репозитории?"
 ```shell
-podman image push ...
+podman image push artifactory.raiffeisen.ru/container-training-docker/ruapnsd/app:1.0.0
 ```
 
 Then участники делятся проблемами и отвечают на вопросы
 ----
-- [ ] В каком порядке выполнялись директивы Dockerfile?
-- [ ] Сколько новых layers добавила сборка к базовому образу?
-- [ ] Когда и по какой причине остановился контейнер?
+- [ ] В каком порядке выполнялись директивы Dockerfile? сверху вниз
+- [ ] Сколько новых layers добавила сборка к базовому образу? 
+- [ ] Когда и по какой причине остановился контейнер? 
 - [ ] Что происходит с процессом приложения, когда останавливаем контейнер?
 - [ ] Сколько раз вы столкнулись с настройкой экстернализированной конфигурации приложения?
 
