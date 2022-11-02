@@ -289,30 +289,30 @@ podman container run --name demo -it artifactory.raiffeisen.ru/ext-rbru-osimage-
 /# touch side-effect.txt
 /# exit
 podman container diff demo
-podman container commit demo artifactory.raiffeisen.ru/container-training/docker/ruapnsd/demo
+podman container commit demo artifactory.raiffeisen.ru/container-training-docker/ruapnsd/demo
 podman image ls
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как создать новый тэг образа?"
 ```shell
-podman image tag artifactory.raiffeisen.ru/container-training/ruapnsd/demo:latest {{ registry-host }}/container-training/{{ registry-account }}/demo:1.0.0
+podman image tag artifactory.raiffeisen.ru/container-training-docker/ruapnsd/demo:latest artifactory.raiffeisen.ru/container-training-docker/ruapnsd/demo:1.0.0
 podman image ls
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как выгрузить образ в репозиторий?"
 ```shell
-podman image push {{ registry-host }}/container-training/{{ registry-account }}/demo:1.0.0
+podman image push artifactory.raiffeisen.ru/container-training-docker/ruapnsd/demo:1.0.0
 ```
 
-- Сценарий "Как ...?"
+- Сценарий "Как удалить образы и их тэги?"
 ```shell
 podman image ls
 podman container rm demo
 podman image prune
 podman image ls
-podman image rm {{ registry-host }}/container-training/{{ registry-account }}/demo:1.0.0
+podman image rm artifactory.raiffeisen.ru/container-training-docker/ruapnsd/demo:1.0.0
 podman image ls
-podman image rm {{ registry-host }}/container-training/{{ registry-account }}/demo:latest
+podman image rm podman image rm artifactory.raiffeisen.ru/container-training-docker/ruapnsd/demo:latest
 podman image ls
 podman image prune --all
 ```
@@ -320,10 +320,10 @@ podman image prune --all
 Then участники делятся проблемами и отвечают на вопросы
 ----
 - [ ] Как назвали сценарии?
-- [ ] Какой тег у образа по умолчанию?
-- [ ] В чем физический смысл удаления образа командой `rm`?
-- [ ] Всегда ли удаляется образ по команде `rm`?
-- [ ] Что делает prune?
+- [ ] Какой тег у образа по умолчанию? latest
+- [ ] В чем физический смысл удаления образа командой `rm`? удаляется тэг (untag), а если больше нет ссылок, то удаляется образ
+- [ ] Всегда ли удаляется образ по команде `rm`? нет, торлько когда на образ больше не осталось ссылок
+- [ ] Что делает prune? удаляет физически образ, если на него больше нет ссылок
 - [ ] Что такое [_dangling_](https://docs.docker.com/config/pruning/#prune-images) image?
 
 Жизненный цикл пода и контейнера <sup>30</sup>

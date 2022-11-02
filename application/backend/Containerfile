@@ -1,5 +1,7 @@
-FROM openjdk:11-jre-slim
+#FROM artifactory.raiffeisen.ru/jvmcommunity-docker/temurin11-jdk:11.0.14_9-slim
+FROM artifactory.raiffeisen.ru/ext-rbru-osimage-docker/alpine:3.14
 EXPOSE 8080
+RUN apk update && apk add openjdk11-jre
 WORKDIR /dbo
 COPY dbo-1.0-SNAPSHOT.jar ./app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
